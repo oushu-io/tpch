@@ -22,7 +22,7 @@ DATASIZE=1
 # use <n> processes to generate data.  
 PARALLEL=2
 
-# HAWQ Table bucket number
+# OushuDB Table bucket number
 BUCKETNUM=8	
 
 # Query parallelism, currently maximum 20.  
