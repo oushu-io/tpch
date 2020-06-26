@@ -22,8 +22,8 @@ DATASIZE=1
 # use <n> processes to generate data.  
 PARALLEL=2
 
-# OushuDB Table bucket number
-BUCKETNUM=8	
+# OushuDB Table bucket number.
+BUCKETNUM=6
 
 # Query parallelism, currently maximum 40.  
 QUERY_STREAMS=1                                     
