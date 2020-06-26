@@ -1,0 +1,7 @@
+psql -Atf dss.ddl.ext -d tpch
+psql -Atf insert-oushu-write-ext.sql -d tpch
+spark-sql local -f hive.ddl 
+spark-sql local -f hive_100_ext.ddl
+spark-sql local -f hive_load_100.sql 
+spark-sql local -f sel.sql > sel.log 2>&1 
+nohup spark-sql local -hivevar fct=100 -f spark-queries.sql > spark-queries.log 2>&1 &
