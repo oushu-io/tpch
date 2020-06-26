@@ -4,10 +4,10 @@
 # Load data server host,comma separated, multi host for distributed data to multiple nodes.  
 GPLOAD_HOST=192.168.115.130,192.168.115.131,192.168.115.132 
 
-# HAWQ server host.  
+# OushuDB server host.  
 GP_DBHOST=192.168.115.130              
 
-# HAWQ home greenplum_path.sh  
+# OushuDB home greenplum_path.sh  
 BASH_PROFILE=/usr/local/hawq/greenplum_path.sh      
 
 # Load data server directory ,comma separated, multi directory for distributed data.  
