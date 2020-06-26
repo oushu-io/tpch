@@ -15,6 +15,7 @@ DATASIZE=`grep DATASIZE tpch.config|awk -F '=' '{print $2}'`
 T_DATA_DIR=`grep DIRS tpch.config|awk -F '=' '{print $2}'`
 INSERT_STREAMS=`grep INSERT_STREAMS tpch.config|awk -F '=' '{print $2}'`
 ISGENDATA=`grep ISGENDATA tpch.config|awk -F '=' '{print $2}'`
+BUCKETNUM=`grep BUCKETNUM tpch.config|awk -F '=' '{print $2}'`
 
 time=""
 CURDIR=`pwd`
@@ -122,13 +123,13 @@ runCmd "psql -d postgres -c 'drop database if exists $PGDATABASE'"
 runCmd "createdb $PGDATABASE"
 
 if [ "${DDLTYPE}" = "p" ];then
-	runCmd "psql -d $PGDATABASE -f dss.ddl"
+	runCmd "psql -v bkn=${BUCKETNUM} -d $PGDATABASE -f dss.ddl"
 elif [ "${DDLTYPE}" = "o" ];then
-	runCmd "psql -d $PGDATABASE -f dss.ddl.orc"
+	runCmd "psql -v bkn=${BUCKETNUM} -d $PGDATABASE -f dss.ddl.orc"
 elif [ "${DDLTYPE}" = "m" ];then
-	runCmd "psql -d $PGDATABASE -f dss.ddl.magmaap"
+	runCmd "psql -v bkn=${BUCKETNUM} -d $PGDATABASE -f dss.ddl.magmaap"
 else
-	runCmd "psql -d $PGDATABASE -f dss.ddl"
+	runCmd "psql -v bkn=${BUCKETNUM} -d $PGDATABASE -f dss.ddl"
 fi
 
 if [ ${ISGENDATA} -eq 1 ];then

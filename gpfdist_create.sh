@@ -23,7 +23,7 @@ do
 
     d_tmp=$i
 
-    ssh $d_tmp "ps -ef|grep "gpfdist -d*"|grep -v grep|awk '{print \$2}'|xargs kill -9" >& /dev/null
+    ssh $d_tmp "ps -ef|grep \"gpfdist -d*\"|grep -v grep|awk '{print \$2}'|xargs kill -9" >& /dev/null
  
     arr=(${T_DATA_DIR//,/ })
     for i_t_data_dir in ${arr[@]}

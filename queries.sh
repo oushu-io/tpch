@@ -1,20 +1,24 @@
 #!/bin/bash
 
-QUERY_STREAMS=`grep QUERY_STREAMS tpch.config|awk -F '=' '{print $2}'`
-DDLTYPE=`grep DDLTYPE tpch.config|awk -F '=' '{print $2}'`
 DATASIZE=`grep DATASIZE tpch.config|awk -F '=' '{print $2}'`
+QUERY_STREAMS=`grep QUERY_STREAMS tpch.config|awk -F '=' '{print $2}'`
+
+if [ ${QUERY_STREAMS} -gt 40 ]; then
+	echo "Usage:$0 the QUERY_STREAMS exceeding the maximum limit of 40"
+	exit
+fi
 
 time=""
 CURDIR=`pwd`
 rm -rf ${CURDIR}/logs/sem*
 rm -rf ${CURDIR}/logs/queries*
 
-getTiming()
+getTiming() 
 {
 
     start=$1
     end=$2
-
+   
     start_s=$(echo $start | cut -d '.' -f 1)
     start_ns=$(echo $start | cut -d '.' -f 2)
     end_s=$(echo $end | cut -d '.' -f 1)
@@ -24,32 +28,66 @@ getTiming()
 
 }
 
-startall=$(date +%s.%N)
+start_query()
+{
 
-for ((c = 1; c <= $QUERY_STREAMS; ++c));do
+        while read i
+        do
 
-	if [ "${DDLTYPE}" = "p" ];then
+                echo ================================================================= >> logs/queries${1}.out
+                echo ======================= Query Number ${i} ======================= >> logs/queries${1}.out
+                echo ================================================================= >> logs/queries${1}.out
 
-		echo " ===============================> TPCHQuery stream ${c}" > logs/queries${c}.out
+                start=$(date +%s.%N)
 
-		psql -d tpch -f queries.sql >> logs/queries${c}.out 2>&1 &
+                psql -d tpch -v fct=${DATASIZE} -f ${CURDIR}/WORK/query${i}.sql >> logs/queries${1}.out 2>&1
 
-	else
+                end=$(date +%s.%N)
 
-		echo " ===============================> TPCHQuery stream ${c}" > logs/queries${c}.out
+                getTiming $start $end
 
-		psql -d tpch -f queries_new.sql >> logs/queries${c}.out 2>&1 &
+                echo "TPCDSQuery ${i}: ${time} ms"  >> logs/sem${1}.out
 
-	fi
+        done < ${CURDIR}/WORK/stream${1}.sem
 
-done
+}
 
-wait
+if [ $QUERY_STREAMS -gt 1 ];then 
 
-endall=$(date +%s.%N)
+        startall=$(date +%s.%N)
+        for ((c = 1; c <= $QUERY_STREAMS; ++c)); do
+                echo > logs/queries${c}.out
+                echo "===============================>TPCDSQuery stream ${c}" > logs/sem${c}.out
+                start_query ${c} &
+        done
 
-getTiming $startall $endall
+        wait
 
-grep -i TPCHQuery logs/queries*.out >> logs/queryresult4tpchform.out
-echo "SF is: "$DATASIZE >> logs/queryresult4tpchform.out
-echo "total time : ${time} ms" >> logs/queryresult4tpchform.out
+        for ((c = 1; c <= $QUERY_STREAMS; ++c)); do
+                cat logs/sem${c}.out >> logs/queryresult4tpchform.out
+        done
+
+        endall=$(date +%s.%N)
+
+        getTiming $startall $endall
+
+        echo "SF is: "$DATASIZE >> logs/queryresult4tpchform.out
+
+        echo "total time : ${time} ms" >> logs/queryresult4tpchform.out
+
+else
+
+        startall=$(date +%s.%N)
+        echo > logs/queries0.out
+        echo "===============================>TPCDSQuery stream 0" > logs/sem0.out
+        start_query 0
+        cat logs/sem0.out >> logs/queryresult4tpchform.out
+        endall=$(date +%s.%N)
+
+        getTiming $startall $endall
+
+        echo "SF is: "$DATASIZE >> logs/queryresult4tpchform.out
+
+        echo "total time : ${time} ms" >> logs/queryresult4tpchform.out
+
+fi
