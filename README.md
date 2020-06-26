@@ -20,7 +20,10 @@ DDLTYPE=o
 DATASIZE=1                        
 
 # use <n> processes to generate data.  
-PARALLEL=2                              
+PARALLEL=2
+
+# HAWQ Table bucket number
+BUCKETNUM=8	
 
 # Query parallelism, currently maximum 20.  
 QUERY_STREAMS=1                                     
