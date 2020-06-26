@@ -25,7 +25,7 @@ PARALLEL=2
 # OushuDB Table bucket number
 BUCKETNUM=8	
 
-# Query parallelism, currently maximum 20.  
+# Query parallelism, currently maximum 40.  
 QUERY_STREAMS=1                                     
 
 # Insert parallelism (Load Data).  
