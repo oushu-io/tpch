@@ -1,0 +1,83 @@
+
+CREATE EXTERNAL TABLE
+Timing is on.
+SET
+Time: 0.240 ms
+INSERT 0 25
+Time: 183.384 ms
+ANALYZE
+CREATE EXTERNAL TABLE
+Timing is on.
+SET
+Time: 0.237 ms
+INSERT 0 5
+Time: 159.267 ms
+ANALYZE
+CREATE EXTERNAL TABLE
+Timing is on.
+SET
+Time: 0.343 ms
+INSERT 0 200000
+Time: 1432.975 ms
+ANALYZE
+CREATE EXTERNAL TABLE
+Timing is on.
+SET
+Time: 0.293 ms
+INSERT 0 10000
+Time: 255.537 ms
+ANALYZE
+CREATE EXTERNAL TABLE
+Timing is on.
+SET
+Time: 0.304 ms
+INSERT 0 800000
+Time: 5192.930 ms
+ANALYZE
+CREATE EXTERNAL TABLE
+Timing is on.
+SET
+Time: 0.264 ms
+INSERT 0 150000
+Time: 1472.374 ms
+ANALYZE
+CREATE EXTERNAL TABLE
+Timing is on.
+SET
+Time: 0.264 ms
+INSERT 0 1500000
+Time: 7331.416 ms
+ANALYZE
+CREATE EXTERNAL TABLE
+Timing is on.
+SET
+Time: 0.274 ms
+INSERT 0 6001215
+Time: 40098.350 ms
+ANALYZE
+total insert time : 121742 ms
+===============================>TPCDSQuery stream 0
+TPCDSQuery 1: 522 ms
+TPCDSQuery 2: 432 ms
+TPCDSQuery 3: 558 ms
+TPCDSQuery 4: 317 ms
+TPCDSQuery 5: 584 ms
+TPCDSQuery 6: 479 ms
+TPCDSQuery 7: 1248 ms
+TPCDSQuery 8: 699 ms
+TPCDSQuery 9: 1666 ms
+TPCDSQuery 10: 686 ms
+TPCDSQuery 11: 393 ms
+TPCDSQuery 12: 578 ms
+TPCDSQuery 13: 523 ms
+TPCDSQuery 14: 422 ms
+TPCDSQuery 15: 474 ms
+TPCDSQuery 16: 991 ms
+TPCDSQuery 17: 928 ms
+TPCDSQuery 18: 652 ms
+TPCDSQuery 19: 812 ms
+TPCDSQuery 20: 678 ms
+TPCDSQuery 21: 961 ms
+TPCDSQuery 22: 461 ms
+SF is: 1
+total time : 15253 ms
