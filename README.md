@@ -23,7 +23,10 @@ DATASIZE=1
 PARALLEL=2
 
 # OushuDB Table bucket number.
-BUCKETNUM=6
+BUCKETNUM=16
+
+# OushuDB VSEG_RESOURCE_QUOTA default 256mb.
+VSEG_RESOURCE_QUOTA=1gb
 
 # Query parallelism, currently maximum 40.  
 QUERY_STREAMS=1                                     
