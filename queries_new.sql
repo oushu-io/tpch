@@ -139,7 +139,7 @@ select 'TPCHQuery 10:'||(:tpch_query_end - :tpch_query_start) / 1000000 || ' ms'
 -- add by alex 2010-08-23
 \set tpch_query_start `date +%s%N`
 
-select ps_partkey, sum(ps_supplycost * ps_availqty)::bigint as value from partsupp, supplier, nation where ps_suppkey = s_suppkey and s_nationkey = n_nationkey and n_name = 'GERMANY' group by ps_partkey having sum(ps_supplycost * ps_availqty) > ( select sum(ps_supplycost * ps_availqty) * 0.0001000000 from partsupp, supplier, nation where ps_suppkey = s_suppkey and s_nationkey = n_nationkey and n_name = 'ALGERIA' ) order by value desc;
+select ps_partkey, sum(ps_supplycost * ps_availqty)::bigint as value from partsupp, supplier, nation where ps_suppkey = s_suppkey and s_nationkey = n_nationkey and n_name = 'GERMANY' group by ps_partkey having sum(ps_supplycost * ps_availqty) > ( select sum(ps_supplycost * ps_availqty) * (0.0001/:fct) from partsupp, supplier, nation where ps_suppkey = s_suppkey and s_nationkey = n_nationkey and n_name = 'ALGERIA' ) order by value desc;
 
 -- add by alex 2010-08-23
 \set tpch_query_end `date +%s%N`

@@ -1,4 +1,5 @@
 \timing
+set new_executor=on;
 SELECT
 	l_returnflag,
 	l_linestatus,

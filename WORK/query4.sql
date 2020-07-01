@@ -1,4 +1,5 @@
 \timing
+set new_executor=on;
 SELECT
 	o_orderpriority,
 	count(*) AS order_count

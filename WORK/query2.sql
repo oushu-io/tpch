@@ -1,4 +1,5 @@
 \timing
+set new_executor=on;
 SELECT
 	s_acctbal :: BIGINT,
 	s_name,

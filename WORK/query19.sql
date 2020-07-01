@@ -1,4 +1,5 @@
 \timing
+set new_executor=on;
 SELECT
 	sum(
 		l_extendedprice * (1 - l_discount)

@@ -1,4 +1,5 @@
 \timing
+set new_executor=on;
 SELECT
 	ps_partkey,
 	sum(ps_supplycost * ps_availqty) :: BIGINT AS

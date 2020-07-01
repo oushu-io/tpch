@@ -1,4 +1,5 @@
 \timing
+set new_executor=on;
 SELECT
 	c_name,
 	c_custkey,

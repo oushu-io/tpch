@@ -1,4 +1,5 @@
 \timing
+set new_executor=on;
 SELECT
 	supp_nation,
 	cust_nation,

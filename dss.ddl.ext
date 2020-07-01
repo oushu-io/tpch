@@ -1,0 +1,72 @@
+-- Sccsid:     @(#)dss.ddl	2.1.8.1
+drop external table if exists NATION_100_ext;
+CREATE EXTERNAL TABLE NATION_100_ext  ( N_NATIONKEY  bigint ,
+                            N_NAME       VARCHAR(25) ,
+                            N_REGIONKEY  bigint ,
+                            N_COMMENT    VARCHAR(152)) location('hdfs://train:9000/hawq/exportdata/100/nation') format 'text' (delimiter '|' null '');
+
+drop external table if exists REGION_100_ext;
+CREATE EXTERNAL TABLE REGION_100_ext  ( R_REGIONKEY  bigint ,
+                            R_NAME       VARCHAR(25) ,
+                            R_COMMENT    VARCHAR(152)) location('hdfs://train:9000/hawq/exportdata/100/region') format 'text' (delimiter '|' null '');
+drop external table if exists PART_100_ext;
+CREATE EXTERNAL TABLE PART_100_ext  ( P_PARTKEY     bigint ,
+                          P_NAME        VARCHAR(55) ,
+                          P_MFGR        VARCHAR(25) ,
+                          P_BRAND       VARCHAR(10) ,
+                          P_TYPE        VARCHAR(25) ,
+                          P_SIZE        bigint ,
+                          P_CONTAINER   VARCHAR(10) ,
+                          P_RETAILPRICE DECIMAL(15,2) ,
+                          P_COMMENT     VARCHAR(23)  ) location('hdfs://train:9000/hawq/exportdata/100/part') format 'text' (delimiter '|' null '');
+drop external table if exists SUPPLIER_100_ext;
+CREATE EXTERNAL TABLE SUPPLIER_100_ext ( S_SUPPKEY     bigint ,
+                             S_NAME        VARCHAR(25) ,
+                             S_ADDRESS     VARCHAR(40) ,
+                             S_NATIONKEY   bigint ,
+                             S_PHONE       VARCHAR(15) ,
+                             S_ACCTBAL     DECIMAL(15,2) ,
+                             S_COMMENT     VARCHAR(101) )  location('hdfs://train:9000/hawq/exportdata/100/supplier') format 'text' (delimiter '|' null '');
+drop external table if exists PARTSUPP_100_ext;
+CREATE EXTERNAL TABLE PARTSUPP_100_ext ( PS_PARTKEY     bigint ,
+                             PS_SUPPKEY     bigint ,
+                             PS_AVAILQTY    bigint ,
+                             PS_SUPPLYCOST  DECIMAL(15,2)  ,
+                             PS_COMMENT     VARCHAR(199)  )location('hdfs://train:9000/hawq/exportdata/100/partsupp') format 'text' (delimiter '|' null ''); 
+drop external table if exists CUSTOMER_100_ext;
+CREATE EXTERNAL TABLE CUSTOMER_100_ext ( C_CUSTKEY     bigint ,
+                             C_NAME        VARCHAR(25) ,
+                             C_ADDRESS     VARCHAR(40) ,
+                             C_NATIONKEY   bigint ,
+                             C_PHONE       VARCHAR(15) ,
+                             C_ACCTBAL     DECIMAL(15,2)   ,
+                             C_MKTSEGMENT  VARCHAR(10) ,
+                             C_COMMENT     VARCHAR(117) )location('hdfs://train:9000/hawq/exportdata/100/customer') format 'text' (delimiter '|' null ''); 
+drop external table if exists ORDERS_100_ext;
+CREATE EXTERNAL TABLE ORDERS_100_ext  ( O_ORDERKEY       bigint ,
+                           O_CUSTKEY        bigint ,
+                           O_ORDERSTATUS    VARCHAR(1) ,
+                           O_TOTALPRICE     DECIMAL(15,2) ,
+                           O_ORDERDATE      DATE ,
+                           O_ORDERPRIORITY  VARCHAR(15) ,  -- R
+                           O_CLERK          VARCHAR(15) ,  -- R
+                           O_SHIPPRIORITY   bigint ,
+                           O_COMMENT        VARCHAR(79) )location('hdfs://train:9000/hawq/exportdata/100/orders') format 'text' (delimiter '|' null ''); 
+drop external table if exists LINEITEM_100_ext;
+CREATE EXTERNAL TABLE LINEITEM_100_ext ( L_ORDERKEY    bigint ,
+                             L_PARTKEY     bigint ,
+                             L_SUPPKEY     bigint ,
+                             L_LINENUMBER  bigint ,
+                             L_QUANTITY    DECIMAL(15,2) ,
+                             L_EXTENDEDPRICE  DECIMAL(15,2) ,
+                             L_DISCOUNT    DECIMAL(15,2) ,
+                             L_TAX         DECIMAL(15,2) ,
+                             L_RETURNFLAG  VARCHAR(1) ,
+                             L_LINESTATUS  VARCHAR(1) ,
+                             L_SHIPDATE    DATE ,
+                             L_COMMITDATE  DATE ,
+                             L_RECEIPTDATE DATE ,
+                             L_SHIPINSTRUCT VARCHAR(25) ,  -- R
+                             L_SHIPMODE     VARCHAR(10) ,  -- R
+                             L_COMMENT      VARCHAR(44) ) location('hdfs://train:9000/hawq/exportdata/100/lineitem') format 'text' (delimiter '|' null ''); 
+

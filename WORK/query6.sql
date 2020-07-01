@@ -1,4 +1,5 @@
 \timing
+set new_executor=on;
 SELECT
 	sum(l_extendedprice * l_discount) :: BIGINT AS revenue
 FROM

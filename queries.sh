@@ -2,6 +2,7 @@
 
 DATASIZE=`grep DATASIZE tpch.config|awk -F '=' '{print $2}'`
 QUERY_STREAMS=`grep QUERY_STREAMS tpch.config|awk -F '=' '{print $2}'`
+VSEG_RESOURCE_QUOTA=`grep VSEG_RESOURCE_QUOTA tpch.config|awk -F '=' '{print $2}'`
 
 if [ ${QUERY_STREAMS} -gt 40 ]; then
 	echo "Usage:$0 the QUERY_STREAMS exceeding the maximum limit of 40"
@@ -51,7 +52,7 @@ start_query()
         done < ${CURDIR}/WORK/stream${1}.sem
 
 }
-
+psql -d postgres -Atc "ALTER RESOURCE QUEUE pg_default with(vseg_resource_quota='mem:${VSEG_RESOURCE_QUOTA}');"
 if [ $QUERY_STREAMS -gt 1 ];then 
 
         startall=$(date +%s.%N)
@@ -91,3 +92,4 @@ else
         echo "total time : ${time} ms" >> logs/queryresult4tpchform.out
 
 fi
+psql -d postgres -Atc "ALTER RESOURCE QUEUE pg_default with(vseg_resource_quota='mem:256mb');"

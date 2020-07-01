@@ -1,5 +1,6 @@
 \timing
-set new_executor=auto;
+set new_executor=on;
+set enable_groupagg=off;
 SELECT
 	p_brand,
 	p_type,

@@ -1,4 +1,5 @@
 \timing
+set new_executor=on;
 CREATE VIEW revenue0 (supplier_no, total_revenue) AS SELECT
 	l_suppkey,
 	sum(

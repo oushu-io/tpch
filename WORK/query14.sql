@@ -1,4 +1,5 @@
 \timing
+set new_executor=on;
 SELECT
 	(
 		100.00 * sum(

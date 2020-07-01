@@ -1,4 +1,5 @@
 \timing
+set new_executor=on;
 SELECT
 	(sum(l_extendedprice) / 7.0) :: BIGINT AS avg_yearly
 FROM

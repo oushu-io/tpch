@@ -1,4 +1,5 @@
 \timing
+set new_executor=on;
 SELECT
 	n_name,
 	sum(
