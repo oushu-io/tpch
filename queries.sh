@@ -41,7 +41,7 @@ start_query()
 
                 start=$(date +%s.%N)
 
-                psql -d tpch -v fct=${DATASIZE} -f ${CURDIR}/WORK/query${i}.sql >> logs/queries${1}.out 2>&1
+                psql -d tpch -v fct=${DATASIZE} -v vid=${1} -f ${CURDIR}/WORK/query${i}.sql >> logs/queries${1}.out 2>&1
 
                 end=$(date +%s.%N)
 
