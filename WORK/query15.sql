@@ -1,6 +1,6 @@
 \timing
 set new_executor=on;
-CREATE VIEW revenue0 (supplier_no, total_revenue) AS SELECT
+CREATE VIEW revenue:vid (supplier_no, total_revenue) AS SELECT
 	l_suppkey,
 	sum(
 		l_extendedprice * (1 - l_discount)
@@ -21,17 +21,17 @@ SELECT
 	total_revenue :: BIGINT
 FROM
 	supplier,
-	revenue0
+	revenue:vid
 WHERE
 	s_suppkey = supplier_no
 AND total_revenue = (
 	SELECT
 		max(total_revenue)
 	FROM
-		revenue0
+		revenue:vid
 )
 ORDER BY
 	s_suppkey;
 
 
-drop view revenue0;
+drop view revenue:vid;
