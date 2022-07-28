@@ -1,4 +1,6 @@
 
+
+
 - 01.预先创建presto table
 - 02.预先创建HIVE external table
 - 03.生成数据 01_dbgenData.sh
