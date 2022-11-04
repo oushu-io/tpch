@@ -52,7 +52,7 @@ start_query()
         done < ${CURDIR}/WORK/stream${1}.sem
 
 }
-psql -d postgres -Atc "ALTER RESOURCE QUEUE pg_default with(vseg_resource_quota='mem:${VSEG_RESOURCE_QUOTA}');"
+## psql -d postgres -Atc "ALTER RESOURCE QUEUE pg_default with(vseg_resource_quota='mem:${VSEG_RESOURCE_QUOTA}');"
 if [ $QUERY_STREAMS -gt 1 ];then 
 
         startall=$(date +%s.%N)
@@ -92,4 +92,4 @@ else
         echo "total time : ${time} ms" >> logs/queryresult4tpchform.out
 
 fi
-psql -d postgres -Atc "ALTER RESOURCE QUEUE pg_default with(vseg_resource_quota='mem:256mb');"
+## psql -d postgres -Atc "ALTER RESOURCE QUEUE pg_default with(vseg_resource_quota='mem:256mb');"
