@@ -98,7 +98,7 @@ done
 
 #echo ${d_gpfdist_ips}
 
-d_ext_create="set default_hash_table_bucket_number=${BUCKETNUM};drop  EXTERNAL TABLE if exists ext_${TBNAME};             \
+d_ext_create="drop  EXTERNAL TABLE if exists ext_${TBNAME};             \
 	      CREATE READABLE EXTERNAL TABLE ext_${TBNAME} (like ${TBNAME})     \
 	      LOCATION(${d_gpfdist_ips#,})                         \
 	      FORMAT 'CSV' (DELIMITER '|' NULL '');"
